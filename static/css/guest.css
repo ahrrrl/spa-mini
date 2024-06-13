@@ -10,6 +10,8 @@
   text-align: center;
   margin: auto;
 }
+
+
 h1 {
   color: #333;
 }
@@ -60,9 +62,9 @@ textarea {
 }
 
 body {
-  background: url('https://mblogthumb-phinf.pstatic.net/MjAyMTA5MTNfMjYg/MDAxNjMxNDk3NDk2MjMx.Tf44puxMdgKRq7bLHSwJ170eMQVvFs79ILF2vF6GPaYg.9LWYv_4vLododBXxmtn3CUbEB4TdcQK5Va-Ulx2HQkEg.JPEG.yzzzii/EFF25CDC-9A16-49BC-8DC7-23A7155FF9A7.JPG?type=w800')
-    no-repeat center center fixed;
-  background-size: cover;
+  background-image: url('https://img.freepik.com/free-vector/nature-roadside-background-scene_1308-131779.jpg?t=st=1718268509~exp=1718272109~hmac=9f78562606ca2e3e7f6a2fc5ef0ced350d43854a8ac1f4689d7e342fde35e339&w=1480');
+  background-position: center;
+  background-size: auto 100%;
   color: white;
 }
 
@@ -77,4 +79,16 @@ body {
 .guestbook-entries {
   height: 50vh;
   overflow: auto;
+}
+
+/* @font-face 규칙 추가 */
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'DungGeunMo', Arial, sans-serif;
 }

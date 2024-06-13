@@ -1,8 +1,9 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css');
+
 body {
-  background-image: url('https://mblogthumb-phinf.pstatic.net/MjAyMTA5MTNfMjYg/MDAxNjMxNDk3NDk2MjMx.Tf44puxMdgKRq7bLHSwJ170eMQVvFs79ILF2vF6GPaYg.9LWYv_4vLododBXxmtn3CUbEB4TdcQK5Va-Ulx2HQkEg.JPEG.yzzzii/EFF25CDC-9A16-49BC-8DC7-23A7155FF9A7.JPG?type=w800');
+  background-image: url('https://img.freepik.com/free-vector/nature-roadside-background-scene_1308-131779.jpg?t=st=1718268509~exp=1718272109~hmac=9f78562606ca2e3e7f6a2fc5ef0ced350d43854a8ac1f4689d7e342fde35e339&w=1480');
   background-position: center;
-  background-size: cover;
+  background-size: auto 100%;
   color: white;
 }
 
@@ -44,11 +45,9 @@ body {
   max-width: 600px;
   height: auto;
   border-radius: 50px;
-  mask-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 1) 70%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  mask-image: radial-gradient(circle,
+      rgba(0, 0, 0, 1) 70%,
+      rgba(0, 0, 0, 0) 100%);
   display: block;
 }
 
@@ -86,27 +85,65 @@ body {
   font-weight: bold;
   padding: 20px 0;
 }
+
 .image-container {
   display: flex;
-  overflow-x: auto; /* 가로 스크롤 설정 */
-  scroll-snap-type: x mandatory; /* 스크롤 스냅 설정 */
-  margin-bottom: 20px; /* 하단 여백 추가 */
+  overflow-x: auto;
+  /* 가로 스크롤 설정 */
+  scroll-snap-type: x mandatory;
+  /* 스크롤 스냅 설정 */
+  margin-bottom: 20px;
+  /* 하단 여백 추가 */
 }
 
 .image-card {
   flex: 0 0 auto;
-  margin-right: 10px; /* 이미지 카드 간격 조정 */
-  width: 300px; /* 이미지 카드 너비 설정 */
-  scroll-snap-align: center; /* 스크롤 스냅 정렬 */
-  text-align: center; /* 텍스트 가운데 정렬 */
+  margin-right: 10px;
+  /* 이미지 카드 간격 조정 */
+  width: 300px;
+  /* 이미지 카드 너비 설정 */
+  scroll-snap-align: center;
+  /* 스크롤 스냅 정렬 */
+  text-align: center;
+  /* 텍스트 가운데 정렬 */
 }
 
 .next-button {
-  margin-top: 10px; /* 버튼과 이미지 사이 여백 추가 */
+  margin-top: 10px;
+  /* 버튼과 이미지 사이 여백 추가 */
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* @font-face 규칙 추가 */
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DungGeunMo', Arial, sans-serif;
+}
+
+#randomYoutubeTitle1,
+#randomYoutubeTitle2,
+#randomYoutubeTitle3,
+#randomYoutubeArtist1,
+#randomYoutubeArtist2,
+#randomYoutubeArtist3 {
+  color: black;
+  /* 검정색으로 글자색 설정 */
+}
+
+.navbar-nav .nav-link {
+  color: black !important;
+}
+
+.randomYoutubeImg {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+  /* 이미지 비율 유지 및 가운데 맞춤 */
 }

@@ -13,20 +13,24 @@ document.addEventListener('DOMContentLoaded', function () {
             const index = startIndex + i;
             const card = data[i];
             if (card) {
-              document.getElementById(`randomYoutubeTitle${i + 1}`).innerText =
-                card.title;
-              document.getElementById(`randomYoutubeArtist${i + 1}`).innerText =
-                card.artist;
-              document.getElementById(`randomYoutubeImage${i + 1}`).src =
-                card.image_url;
-              document.getElementById(`randomYoutubeLink${i + 1}`).href =
-                card.link_url;
+              const titleElement = document.getElementById(`randomYoutubeTitle${i + 1}`);
+              const artistElement = document.getElementById(`randomYoutubeArtist${i + 1}`);
+              const imageElement = document.getElementById(`randomYoutubeImage${i + 1}`);
+              const linkElement = document.getElementById(`randomYoutubeLink${i + 1}`);
+
+              titleElement.innerText = card.title;
+              artistElement.innerText = card.artist;
+              imageElement.src = card.image_url;
+              linkElement.href = card.link_url;
+
+              // 이미지의 최대 너비 설정
+              imageElement.style.maxWidth = "100%";
+              // 이미지 높이 자동 조정
+              imageElement.style.height = "auto";
             } else {
               // 데이터가 없을 경우 처리
-              document.getElementById(`randomYoutubeTitle${i + 1}`).innerText =
-                '';
-              document.getElementById(`randomYoutubeArtist${i + 1}`).innerText =
-                '';
+              document.getElementById(`randomYoutubeTitle${i + 1}`).innerText = '';
+              document.getElementById(`randomYoutubeArtist${i + 1}`).innerText = '';
               document.getElementById(`randomYoutubeImage${i + 1}`).src = '';
               document.getElementById(`randomYoutubeLink${i + 1}`).href = '';
             }
