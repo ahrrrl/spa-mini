@@ -189,4 +189,4 @@ def edit_entry(entry_id):
         return jsonify({'error': '해당 ID의 방명록을 찾을 수 없습니다.'}), 404
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)

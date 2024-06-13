@@ -62,7 +62,7 @@ textarea {
 }
 
 body {
-  background-image: url('https://img.freepik.com/free-vector/nature-roadside-background-scene_1308-131779.jpg?t=st=1718268509~exp=1718272109~hmac=9f78562606ca2e3e7f6a2fc5ef0ced350d43854a8ac1f4689d7e342fde35e339&w=1480');
+  background-image: url("{{ url_for('static', filename='sky.jpg') }}");
   background-position: center;
   background-size: auto 100%;
   color: white;
