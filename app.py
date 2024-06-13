@@ -13,10 +13,10 @@ from sqlalchemy.sql.expression import func
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] =\
         'sqlite:///' + os.path.join(basedir, 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'your_secret_key'
 
 db = SQLAlchemy(app)
 
@@ -40,7 +40,7 @@ def home():
     return render_template('main.html')
 
 @app.route("/youtubelinks/")
-def music():
+def youtubeLinks():
     song_list = Youtubes.query.all()
     return render_template('youtube.html', data=song_list)
 
@@ -58,7 +58,7 @@ def search():
 
 
 @app.route("/youtubelinks/<username>/")
-def render_music_filter(username):
+def render_youtubeLinks_filter(username):
     filter_list = Youtubes.query.filter_by(username=username).all()
     return render_template('youtube.html', data=filter_list)
 
@@ -73,7 +73,7 @@ def get_youtube_thumbnail_url(youtube_url):
         return None
 
 @app.route("/youtubelinks/create/")
-def music_create():
+def youtubeLinks_create():
     #form에서 보낸 데이터 받아오기
     username_receive = request.args.get('username')
     title_receive = request.args.get('title')
@@ -85,29 +85,29 @@ def music_create():
     data = Youtubes(username=username_receive, title=title_receive, artist=artist_receive, image_url=image_url_receive, link_url = link_url_receive)
     db.session.add(data)
     db.session.commit()
-    return redirect(url_for('render_music_filter', username=username_receive))
+    return redirect(url_for('render_youtubeLinks_filter', username=username_receive))
     
 
 @app.route("/youtubelinks/delete/<int:id>", methods=['POST'])
-def music_delete(id):
+def youtubeLinks_delete(id):
     youtube_to_delete = Youtubes.query.get_or_404(id)
     username = youtube_to_delete.username
     db.session.delete(youtube_to_delete)
     db.session.commit()
-    return redirect(url_for('render_music_filter', username=username))
+    return redirect(url_for('render_youtubeLinks_filter', username=username))
 
 @app.route("/random_song/")
 def random_song():
-    random_youtube = Youtubes.query.order_by(func.random()).first()
+    random_youtube = Youtubes.query.order_by(func.random()).limit(3).all()
     if random_youtube:
-        return jsonify({
-            'id': random_youtube.id,
-            'username': random_youtube.username,
-            'artist': random_youtube.artist,
-            'title': random_youtube.title,
-            'image_url': random_youtube.image_url,
-            'link_url': random_youtube.link_url
-        })
+        return jsonify([{
+            'id': youtube.id,
+            'username': youtube.username,
+            'artist': youtube.artist,
+            'title': youtube.title,
+            'image_url': youtube.image_url,
+            'link_url': youtube.link_url
+        } for youtube in random_youtube])
     else:
         return jsonify({'error': 'No songs found'}), 404
 
@@ -145,9 +145,10 @@ def get_entries():
 def add_entry():
     name = request.json.get('name', '익명')
     message = request.json['message']
+    password = request.json.get('password')
 
     data = read_data()
-    data.append({'id': len(data) + 1, 'name': name, 'message': message})
+    data.append({'id': len(data) + 1, 'name': name, 'message': message, 'password': password})
     save_data(data)
 
     return jsonify({'success': True})
@@ -155,12 +156,37 @@ def add_entry():
 # 방명록 데이터 삭제하기 API
 @app.route('/delete_entry/<int:entry_id>', methods=['DELETE'])
 def delete_entry(entry_id):
+    password = request.json['password']
+
     data = read_data()
-    data = [entry for entry in data if entry['id'] != entry_id]
-    save_data(data)
+    entry = next((entry for entry in data if entry['id'] == entry_id), None)
+    if entry:
+        if password == entry.get('password'):
+            data.remove(entry)
+            save_data(data)
+            return jsonify({'success': True})
+        else:
+            return jsonify({'error': '비밀번호가 일치하지 않습니다.'}), 401
+    else:
+        return jsonify({'error': '해당 ID의 방명록을 찾을 수 없습니다.'}), 404
 
-    return jsonify({'success': True})
+# 방명록 데이터 수정하기 API
+@app.route('/edit_entry/<int:entry_id>', methods=['PUT'])
+def edit_entry(entry_id):
+    new_message = request.json['message']
+    password = request.json['password']
 
+    data = read_data()
+    entry = next((entry for entry in data if entry['id'] == entry_id), None)
+    if entry:
+        if password == entry.get('password'):
+            entry['message'] = new_message
+            save_data(data)
+            return jsonify({'success': True})
+        else:
+            return jsonify({'error': '비밀번호가 일치하지 않습니다.'}), 401
+    else:
+        return jsonify({'error': '해당 ID의 방명록을 찾을 수 없습니다.'}), 404
 
 if __name__ == "__main__":
     app.run(debug=True)

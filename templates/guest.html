@@ -1,92 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>익명 방명록</title>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>여기봐 | 방명록</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <style>
-       @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css');
-      
-        
-        #container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
-            margin: auto;
-        }
-        h1 {
-            color: #333;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input, textarea {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #f0b4b4;
-            border-radius: 5px;
-        }
-        .logo-img {
-        height: 44px;
-        }
-        .entry {
-            background-color: #9f9f9f;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .entry h3 {
-            margin: 0;
-            width: 30%;
-            text-align: left;
-        }
-        .entry p {
-            margin: 0;
-            width: 50%;
-            text-align: left;
-        }
-        .entry button {
-            padding: 5px 10px;
-            background-color: gray;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        .entry button:hover {
-            background-color: #c0392b;
-        }
-
-        body {
-        background: url('https://mblogthumb-phinf.pstatic.net/MjAyMTA5MTNfMjYg/MDAxNjMxNDk3NDk2MjMx.Tf44puxMdgKRq7bLHSwJ170eMQVvFs79ILF2vF6GPaYg.9LWYv_4vLododBXxmtn3CUbEB4TdcQK5Va-Ulx2HQkEg.JPEG.yzzzii/EFF25CDC-9A16-49BC-8DC7-23A7155FF9A7.JPG?type=w800') no-repeat center center fixed;
-        background-size: cover;
-        color: white;
-    }
-    </style>
-</head>
-<body>
-  <nav class="navbar d-flex justify-content-space-between" data-bs-theme="dark">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/guest.css') }}"
+    />
+  </head>
+  <body>
+    <nav
+      class="navbar d-flex justify-content-space-between"
+      data-bs-theme="dark"
+    >
       <div class="ms-3">
-        <img
-          class="logo-img"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/YouTube_Logo_%282013-2017%29.svg/512px-YouTube_Logo_%282013-2017%29.svg.png"
-          alt=""
-        />
+        <a href="https://www.youtube.com/">
+          <img
+            class="logo-img"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/YouTube_Logo_%282013-2017%29.svg/512px-YouTube_Logo_%282013-2017%29.svg.png"
+            alt=""
+          />
+        </a>
       </div>
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -112,34 +53,46 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ url_for('music')}}"
+                <a
+                  class="nav-link text-dark"
+                  href="{{ url_for('youtubeLinks')}}"
                   >YouTubeLinks</a
                 >
+              </li>
+
               <li class="nav-item">
                 <a class="nav-link text-dark" href="{{ url_for('guest')}}">
-                    방명록
-                </a>  
+                  방명록
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </nav>
-  <div id="container">
+    <div id="container" class="guestbook-container">
       <h1>익명 방명록</h1>
-        <form id="guestbook-form">
-            <input type="text" id="name" placeholder="이름 (선택사항)" />
-            <input id="message" placeholder="메시지를 입력하세요" required></input>
-            <br><button type="submit">제출</button>
-        </form>
-        <div id="entries"></div>
+      <form id="guestbook-form">
+        <input type="text" id="name" placeholder="이름 (선택사항)" />
+        <input type="password" id="password" placeholder="비밀번호" required />
+        <input id="message" placeholder="메시지를 입력하세요" required />
+        <br /><button
+          type="submit"
+          class="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          제출
+        </button>
+      </form>
+      <div id="entries" class="guestbook-entries"></div>
     </div>
     <div class="container">
       <footer>
         <div
           class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top"
         >
-          <p>만든사람 : 김도한  전찬우  조현진 </p>
+          <p>만든사람 : 김도한 전찬우 조현진</p>
           <ul class="list-unstyled d-flex">
             <li class="ms-3">
               <a
@@ -169,58 +122,101 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // 페이지 로드 시 방명록 불러오기
-        $(document).ready(function() {
+      // 페이지 로드 시 방명록 불러오기
+      $(document).ready(function () {
+        loadEntries();
+      });
+
+      // 방명록 불러오기 함수
+      function loadEntries() {
+        $('#entries').empty();
+        $.getJSON('/entries', function (data) {
+          data.forEach(function (entry) {
+            $('#entries').prepend(
+              '<div class="entry" data-id="' +
+                entry.id +
+                '">' +
+                '<h3>' +
+                entry.name +
+                '</h3>' +
+                '<p>' +
+                entry.message +
+                '</p>' +
+                '<button class="edit-button">수정</button>' +
+                '<button class="delete-button">삭제</button>' +
+                '</div>'
+            );
+          });
+        });
+      }
+      // 방명록 제출하기
+      $('#guestbook-form').submit(function (event) {
+        event.preventDefault();
+        var name = $('#name').val() || '익명';
+        var message = $('#message').val();
+        var password = $('#password').val(); // 추가된 비밀번호 필드
+
+        $.ajax({
+          type: 'POST',
+          url: '/add_entry',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            name: name,
+            message: message,
+            password: password,
+          }),
+          success: function (response) {
             loadEntries();
+            $('#name').val('');
+            $('#message').val('');
+            $('#password').val(''); // 비밀번호 필드 리셋
+          },
         });
+      });
+      // 방명록 수정하기
+      // 방명록 수정하기
+      $(document).on('click', '.edit-button', function () {
+        var entryId = $(this).closest('.entry').data('id');
+        var newMessage = prompt('새 메시지를 입력하세요:');
+        var password = prompt('비밀번호를 입력하세요:'); // 비밀번호 입력받기
 
-        // 방명록 불러오기 함수
-        function loadEntries() {
-            $('#entries').empty();
-            $.getJSON('/entries', function(data) {
-                data.forEach(function(entry) {
-                    $('#entries').append('<div class="entry" data-id="' + entry.id + '"><h3>' + entry.name + '</h3><p>' + entry.message + '</p><button class="delete-button">삭제</button></div>');
-                });
-            });
-        }
-
-        // 방명록 제출하기
-        $('#guestbook-form').submit(function(event) {
-            event.preventDefault();
-
-            var name = $('#name').val() || '익명';
-            var message = $('#message').val();
-
-            $.ajax({
-                type: 'POST',
-                url: '/add_entry',
-                contentType: 'application/json',
-                data: JSON.stringify({name: name, message: message}),
-                success: function(response) {
-                    loadEntries();
-                    $('#name').val('');
-                    $('#message').val('');
-                }
-            });
+        $.ajax({
+          type: 'PUT',
+          url: '/edit_entry/' + entryId,
+          contentType: 'application/json',
+          data: JSON.stringify({ message: newMessage, password: password }), // 새 메시지와 비밀번호 전달
+          success: function (response) {
+            loadEntries();
+          },
+          error: function (err) {
+            alert('오류: ' + err.responseJSON.error);
+          },
         });
+      });
 
-        // 방명록 삭제하기
-        $(document).on('click', '.delete-button', function() {
-            var entryId = $(this).closest('.entry').data('id');
+      // 방명록 삭제하기
+      $(document).on('click', '.delete-button', function () {
+        var entryId = $(this).closest('.entry').data('id');
+        var password = prompt('비밀번호를 입력하세요:'); // 비밀번호 입력받기
 
-            $.ajax({
-                type: 'DELETE',
-                url: '/delete_entry/' + entryId,
-                success: function(response) {
-                    loadEntries();
-                }
-            });
+        $.ajax({
+          type: 'DELETE',
+          url: '/delete_entry/' + entryId,
+          contentType: 'application/json',
+          data: JSON.stringify({ password: password }), // 비밀번호 전달
+          success: function (response) {
+            loadEntries();
+          },
+          error: function (err) {
+            alert('오류: ' + err.responseJSON.error);
+          },
         });
+      });
     </script>
     <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-    crossorigin="anonymous"
-  ></script>
-</body>
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

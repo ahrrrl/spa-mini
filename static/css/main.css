@@ -1,0 +1,112 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css');
+body {
+  background-image: url('https://mblogthumb-phinf.pstatic.net/MjAyMTA5MTNfMjYg/MDAxNjMxNDk3NDk2MjMx.Tf44puxMdgKRq7bLHSwJ170eMQVvFs79ILF2vF6GPaYg.9LWYv_4vLododBXxmtn3CUbEB4TdcQK5Va-Ulx2HQkEg.JPEG.yzzzii/EFF25CDC-9A16-49BC-8DC7-23A7155FF9A7.JPG?type=w800');
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px 0;
+}
+
+.logo {
+  height: 32px;
+  margin-left: 30px;
+}
+
+.logo-img {
+  height: 44px;
+}
+
+.randomYoutubeImg {
+  height: 300px;
+  border-radius: 30px;
+}
+
+.logo-img_1 {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 50px;
+  mask-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  display: block;
+}
+
+.lead {
+  color: black;
+  /* p 태그 글자 색상을 검정으로 설정 */
+}
+
+/* 필요한 추가 스타일링 */
+
+.image-container {
+  display: flex;
+  overflow-x: auto;
+  /* 가로 스크롤 설정 */
+  scroll-snap-type: x mandatory;
+  /* 스크롤 스냅 설정 */
+}
+
+.image-card {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  /* 이미지 카드 간격 조정 */
+  width: 300px;
+  /* 이미지 카드 너비 설정 */
+  scroll-snap-align: center;
+  /* 스크롤 스냅 정렬 */
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px 0;
+}
+.image-container {
+  display: flex;
+  overflow-x: auto; /* 가로 스크롤 설정 */
+  scroll-snap-type: x mandatory; /* 스크롤 스냅 설정 */
+  margin-bottom: 20px; /* 하단 여백 추가 */
+}
+
+.image-card {
+  flex: 0 0 auto;
+  margin-right: 10px; /* 이미지 카드 간격 조정 */
+  width: 300px; /* 이미지 카드 너비 설정 */
+  scroll-snap-align: center; /* 스크롤 스냅 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.next-button {
+  margin-top: 10px; /* 버튼과 이미지 사이 여백 추가 */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}

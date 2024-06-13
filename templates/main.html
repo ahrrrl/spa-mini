@@ -1,3 +1,4 @@
+<!-- main.html -->
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -11,91 +12,17 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <style>
-      @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css');
-      body {
-        background-image: url('https://mblogthumb-phinf.pstatic.net/MjAyMTA5MTNfMjYg/MDAxNjMxNDk3NDk2MjMx.Tf44puxMdgKRq7bLHSwJ170eMQVvFs79ILF2vF6GPaYg.9LWYv_4vLododBXxmtn3CUbEB4TdcQK5Va-Ulx2HQkEg.JPEG.yzzzii/EFF25CDC-9A16-49BC-8DC7-23A7155FF9A7.JPG?type=w800');
-        background-position: center;
-        background-size: cover;
-        color: white;
-      }
-
-      /* .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        } */
-
-      .weather {
-        display: flex;
-        align-items: center;
-        margin-right: 30px;
-      }
-
-      .container {
-        display: flex;
-        flex-direction: column;
-        /* Flex 안의 아이템들을 세로 방향으로 배치합니다. */
-        justify-content: center;
-        /* 주축 방향으로 가운데 정렬합니다. */
-        align-items: center;
-        /* 교차축 방향으로 가운데 정렬합니다. */
-        height: 100vh;
-        text-align: center;
-      }
-
-      .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        font-weight: bold;
-        padding: 20px 0;
-      }
-
-      .greeting {
-        margin-bottom: 50px;
-      }
-
-      .motto {
-        margin-bottom: 100px;
-      }
-
-      .logo {
-        height: 32px;
-        margin-left: 30px;
-      }
-
-      .logo-img {
-        height: 44px;
-      }
-
-      .randomYoutubeImg {
-        height: 300px;
-      }
-      @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
-      * {
-        font-family: 'Poppins', sans-serif;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <style></style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
 
   <body>
-    <!-- music의 navbar -->
-    <nav
-      class="navbar d-flex justify-content-space-between"
-      data-bs-theme="dark"
-    >
-      <div class="ms-3">
-        <img
-          class="logo-img"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/YouTube_Logo_%282013-2017%29.svg/512px-YouTube_Logo_%282013-2017%29.svg.png"
-          alt=""
-        />
-      </div>
+    <nav class="navbar d-flex justify-content-between" data-bs-theme="dark">
+      <div class="ms-3"></div>
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <button
@@ -120,7 +47,9 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="{{ url_for('music')}}"
+                <a
+                  class="nav-link text-white"
+                  href="{{ url_for('youtubeLinks')}}"
                   >YouTubeLinks</a
                 >
               </li>
@@ -138,99 +67,71 @@
 
     <div class="container">
       <div class="px-4 py-5 text-center">
-        <h1 class="display-5 fw-bold text-body-emphasis">여기봐</h1>
+        <div>
+          <img
+            class="logo-img_1"
+            src="{{ url_for('static', filename='yogi.png') }}"
+            alt="Brand Logo"
+          />
+        </div>
         <p class="lead mb-4">
           <br />
-          노래를 들으면 생각나는 누군가가 있으신가요?
-          <br /><br />
-          당신의 감성이 담긴 인생곡 플레이리스트
+          어떤 영상을 볼 지 모르겠다면?
           <br />
-          멜로디쉐어에서 소중한 사람과 함께 공유하세요.
+          재밌는 영상을 모두에게 추천하고 싶다면?
+          <br />
         </p>
       </div>
+      <!-- 이미지 컨테이너 -->
+      <div class="image-container">
+        <!-- 이미지 카드 -->
+        <div class="image-card" id="imageCard1">
+          <a id="randomYoutubeLink1" href="" target="_blank">
+            <img
+              class="randomYoutubeImg"
+              id="randomYoutubeImage1"
+              src=""
+              alt="Song Image"
+              style="max-width: 300px"
+            />
+          </a>
+          <p id="randomYoutubeTitle1"></p>
+          <p id="randomYoutubeArtist1"></p>
+        </div>
 
-      <div id="randomYoutubeContainer" style="margin-top: 20px">
-        <a id="randomYoutubeLink" href="" target="_blank">
-          <img
-            class="randomYoutubeImg"
-            id="randomYoutubeImage"
-            src=""
-            alt="Song Image"
-            style="max-width: 300px"
-          />
-        </a>
-        <p id="randomYoutubeTitle"></p>
-        <p id="randomYoutubeArtist"></p>
+        <div class="image-card" id="imageCard2">
+          <a id="randomYoutubeLink2" href="" target="_blank">
+            <img
+              class="randomYoutubeImg"
+              id="randomYoutubeImage2"
+              src=""
+              alt="Song Image"
+              style="max-width: 300px"
+            />
+          </a>
+          <p id="randomYoutubeTitle2"></p>
+          <p id="randomYoutubeArtist2"></p>
+        </div>
+
+        <div class="image-card" id="imageCard3">
+          <a id="randomYoutubeLink3" href="" target="_blank">
+            <img
+              class="randomYoutubeImg"
+              id="randomYoutubeImage3"
+              src=""
+              alt="Song Image"
+              style="max-width: 300px"
+            />
+          </a>
+          <p id="randomYoutubeTitle3"></p>
+          <p id="randomYoutubeArtist3"></p>
+        </div>
       </div>
+      <button id="nextButton" class="btn btn-primary next-button">Next</button>
+      <!-- 다음 이미지 세트 버튼 -->
     </div>
 
-    <div class="footer">
-      <p id="quoteAuthor"></p>
-      <p id="quoteContent"></p>
-    </div>
-
-    <script>
-      function displayCurrentTime() {
-        var currentTime = new Date();
-        var hours = currentTime.getHours();
-        var minutes = currentTime.getMinutes();
-        var seconds = currentTime.getSeconds();
-
-        // AM 또는 PM 설정
-        var meridiem = hours >= 12 ? 'PM' : 'AM';
-
-        // 시간이 12를 넘어가면 12로 나눠서 표시
-        hours = hours > 12 ? hours - 12 : hours;
-
-        // 0을 붙여 한 자리 숫자를 두 자리로 만듦
-        hours = addLeadingZero(hours);
-        minutes = addLeadingZero(minutes);
-        seconds = addLeadingZero(seconds);
-
-        // 시간을 HTML 요소에 표시
-        var timeString = hours + ':' + minutes + ':' + seconds + ' ' + meridiem;
-        document.getElementById('current-time').innerHTML = timeString;
-      }
-
-      function addLeadingZero(number) {
-        return number < 10 ? '0' + number : number;
-      }
-
-      // 1초마다 시간을 업데이트
-      setInterval(displayCurrentTime, 1000);
-
-      document.addEventListener('DOMContentLoaded', function () {
-        fetch('/random_song/')
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.error) {
-              alert(data.error);
-            } else {
-              document.getElementById('randomYoutubeTitle').innerText =
-                data.title;
-              document.getElementById('randomYoutubeArtist').innerText =
-                data.artist;
-              document.getElementById('randomYoutubeImage').src =
-                data.image_url;
-              document.getElementById('randomYoutubeLink').href = data.link_url;
-            }
-          })
-          .catch((error) => console.error('Error:', error));
-      });
-
-      let weather_url = 'http://spartacodingclub.shop/sparta_api/weather/seoul';
-      fetch(weather_url)
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          let temp = data['temp'];
-          let icon_url = data['icon'];
-
-          let message = `${temp}ºC`;
-          $('#weather-msg').text(message);
-          $('#weather-icon').attr('src', icon_url);
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/randomCard.js') }}"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

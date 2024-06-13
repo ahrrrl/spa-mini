@@ -3,31 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>여기봐 유튜브</title>
-    <style>
-      @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css');
-
-      .background-banner {
-        background-image: linear-gradient(
-            45deg,
-            rgb(51 43 43 / 75%),
-            rgb(20 19 20 / 61%)
-          ),
-          url('https://mblogthumb-phinf.pstatic.net/MjAyMTA5MTNfMjYg/MDAxNjMxNDk3NDk2MjMx.Tf44puxMdgKRq7bLHSwJ170eMQVvFs79ILF2vF6GPaYg.9LWYv_4vLododBXxmtn3CUbEB4TdcQK5Va-Ulx2HQkEg.JPEG.yzzzii/EFF25CDC-9A16-49BC-8DC7-23A7155FF9A7.JPG?type=w800');
-        max-height: 100%;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-      }
-
-      .logo-img {
-        height: 44px;
-      }
-      .search-form {
-        float: right;
-      }
-    </style>
+    <title>여기봐 | 유저추천</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
@@ -38,17 +14,20 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/youtube.css') }}">
   </head>
 
   <body data-bs-theme="dark">
     <div class="background-banner">
       <nav class="navbar d-flex justify-content-space-between" data-bs-theme="dark">
         <div class="ms-3">
+          <a href="https://www.youtube.com/">
           <img
             class="logo-img"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/YouTube_Logo_%282013-2017%29.svg/512px-YouTube_Logo_%282013-2017%29.svg.png"
             alt=""
           />
+        </a>
         </div>
         <nav class="navbar navbar-expand-lg">
           <div class="container-fluid">
@@ -74,7 +53,7 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="{{ url_for('music')}}"
+                  <a class="nav-link text-white" href="{{ url_for('youtubeLinks')}}"
                     >YouTubeLinks</a
                   >
                 <li class="nav-item">
@@ -124,7 +103,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">최애 음악</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">추천 유튜브</h1>
               <button
                 type="button"
                 class="btn-close"
@@ -133,10 +112,10 @@
               ></button>
             </div>
             <div class="modal-body">
-              <form action="{{ url_for('music_create')}}" method="GET">
+              <form action="{{ url_for('youtubeLinks_create')}}" method="GET">
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label"
-                    >유저</label
+                    >추천인</label
                   >
                   <input
                     type="text"
@@ -160,7 +139,7 @@
                     name="title"
                   />
                   <div id="emailHelp" class="form-text">
-                    좋아하는 노래 제목을 넣어주세요.
+                    소개하고 싶은 유튜브 제목을 넣어주세요.
                   </div>
                 </div>
                 <div class="mb-3">
@@ -185,7 +164,7 @@
                     name="link_url"
                   />
                 </div>
-                <button type="submit" class="btn btn-danger">Submit</button>
+                <button type="submit" class="btn btn-danger">등록하기</button>
               </form>
             </div>
           </div>
@@ -196,7 +175,10 @@
         {% for youtube in data %}
         <div class="col">
           <div class="card h-100">
-            <img onclick="location.href='{{ youtube.link_url }}'" src="{{youtube.image_url}}" class="card-img-top" alt="..." />
+            <img onclick="window.open('{{ youtube.link_url }}', '_blank')" 
+          src="{{ youtube.image_url }}" 
+          class="card-img-top clickable-image" 
+          alt="..." />
             <div class="card-body">
               <h5 class="card-title">{{youtube.title}}</h5>
               <p class="card-text">{{youtube.artist}}</p>
@@ -204,7 +186,7 @@
           </div>
             <div class="card-footer p-0">
               <form
-                action="{{ url_for('music_delete', id=youtube.id) }}"
+                action="{{ url_for('youtubeLinks_delete', id=youtube.id) }}"
                 method="POST"
               >
                 <button type="submit" class="btn btn-danger w-100">삭제</button>
