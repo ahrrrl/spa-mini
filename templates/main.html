@@ -1,99 +1,152 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>여기봐</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.png') }}"
+      type="image/x-icon"
+    />
+    <style>
+      body {
+        background-image: url("{{ url_for('static', filename='sky.jpg') }}");
+        background-position: center;
+        background-size: auto 100%;
+        color: white;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>여기봐</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-  <style>
-    body {
-      background-image: url("{{ url_for('static', filename='sky.jpg') }}");
-      background-position: center;
-      background-size: auto 100%;
-      color: white;
-    }
-  </style>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-</head>
+  <body>
+    <nav class="navbar d-flex justify-content-between" data-bs-theme="dark">
+      <div class="ms-3"></div>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link text-white nav-hover"
+                  aria-current="page"
+                  href="{{ url_for('home') }}"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link text-white nav-hover"
+                  href="{{ url_for('youtubeLinks') }}"
+                  >YouTubeLinks</a
+                >
+              </li>
 
-<body>
-  <nav class="navbar d-flex justify-content-between" data-bs-theme="dark">
-    <div class="ms-3"></div>
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link text-white" aria-current="page" href="{{ url_for('home') }}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="{{ url_for('youtubeLinks') }}">YouTubeLinks</a>
-            </li>
+              <li class="nav-item nav-hover">
+                <a class="nav-link text-white" href="{{ url_for('guest') }}"
+                  >방명록</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </nav>
 
-            <li class="nav-item">
-              <a class="nav-link text-white" href="{{ url_for('guest') }}">방명록</a>
-            </li>
-          </ul>
+    <div class="container">
+      <div class="px-4 py-5 text-center">
+        <div>
+          <img
+            class="logo-img_1"
+            src="{{ url_for('static', filename='yogi.png') }}"
+            alt="Brand Logo"
+          />
+        </div>
+        <p class="lead mb-4">
+          <br />
+          어떤 영상을 볼 지 모르겠다면?
+          <br />
+          재밌는 영상을 모두에게 추천하고 싶다면?
+          <br />
+        </p>
+      </div>
+      <!-- 이미지 컨테이너 -->
+      <div class="image-container">
+        <!-- 이미지 카드 -->
+        <div class="image-card" id="imageCard1">
+          <a id="randomYoutubeLink1" href="" target="_blank">
+            <img
+              class="randomYoutubeImg"
+              id="randomYoutubeImage1"
+              src=""
+              alt="Song Image"
+              style="max-width: 300px"
+            />
+          </a>
+          <p class="image-card-txt" id="randomYoutubeTitle1"></p>
+          <p class="image-card-txt" id="randomYoutubeArtist1"></p>
+        </div>
+
+        <div class="image-card" id="imageCard2">
+          <a id="randomYoutubeLink2" href="" target="_blank">
+            <img
+              class="randomYoutubeImg"
+              id="randomYoutubeImage2"
+              src=""
+              alt="Song Image"
+              style="max-width: 300px"
+            />
+          </a>
+          <p class="image-card-txt" id="randomYoutubeTitle2"></p>
+          <p class="image-card-txt" id="randomYoutubeArtist2"></p>
+        </div>
+
+        <div class="image-card" id="imageCard3">
+          <a id="randomYoutubeLink3" href="" target="_blank">
+            <img
+              class="randomYoutubeImg"
+              id="randomYoutubeImage3"
+              src=""
+              alt="Song Image"
+              style="max-width: 300px"
+            />
+          </a>
+          <p class="image-card-txt" id="randomYoutubeTitle3"></p>
+          <p class="image-card-txt" id="randomYoutubeArtist3"></p>
         </div>
       </div>
-    </nav>
-  </nav>
-
-  <div class="container">
-    <div class="px-4 py-5 text-center">
-      <div>
-        <img class="logo-img_1" src="{{ url_for('static', filename='yogi.png') }}" alt="Brand Logo" />
-      </div>
-      <p class="lead mb-4">
-        <br />
-        어떤 영상을 볼 지 모르겠다면?
-        <br />
-        재밌는 영상을 모두에게 추천하고 싶다면?
-        <br />
-      </p>
+      <button id="nextButton" class="btn btn-primary next-button">Next</button>
+      <!-- 다음 이미지 세트 버튼 -->
     </div>
-    <!-- 이미지 컨테이너 -->
-    <div class="image-container">
-      <!-- 이미지 카드 -->
-      <div class="image-card" id="imageCard1">
-        <a id="randomYoutubeLink1" href="" target="_blank">
-          <img class="randomYoutubeImg" id="randomYoutubeImage1" src="" alt="Song Image" style="max-width: 300px" />
-        </a>
-        <p id="randomYoutubeTitle1"></p>
-        <p id="randomYoutubeArtist1"></p>
-      </div>
 
-      <div class="image-card" id="imageCard2">
-        <a id="randomYoutubeLink2" href="" target="_blank">
-          <img class="randomYoutubeImg" id="randomYoutubeImage2" src="" alt="Song Image" style="max-width: 300px" />
-        </a>
-        <p id="randomYoutubeTitle2"></p>
-        <p id="randomYoutubeArtist2"></p>
-      </div>
-
-      <div class="image-card" id="imageCard3">
-        <a id="randomYoutubeLink3" href="" target="_blank">
-          <img class="randomYoutubeImg" id="randomYoutubeImage3" src="" alt="Song Image" style="max-width: 300px" />
-        </a>
-        <p id="randomYoutubeTitle3"></p>
-        <p id="randomYoutubeArtist3"></p>
-      </div>
-    </div>
-    <button id="nextButton" class="btn btn-primary next-button">Next</button>
-    <!-- 다음 이미지 세트 버튼 -->
-  </div>
-
-  <script src="{{ url_for('static', filename='js/randomCard.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-    crossorigin="anonymous"></script>
-</body>
+    <script src="{{ url_for('static', filename='js/randomCard.js') }}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

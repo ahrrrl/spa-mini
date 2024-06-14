@@ -11,6 +11,14 @@
   margin: auto;
 }
 
+.nav-hover {
+  border-radius: 16px;
+}
+
+.nav-hover:hover {
+  transition: background-color 0.3s ease;
+  background-color: rgba(200, 200, 200, 0.3);
+}
 
 h1 {
   color: #333;
@@ -84,7 +92,8 @@ body {
 /* @font-face 규칙 추가 */
 @font-face {
   font-family: 'DungGeunMo';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
