@@ -158,11 +158,22 @@
         });
       }
       // 방명록 제출하기
-      $('#guestbook-form').submit(function (event) {
-        event.preventDefault();
-        var name = $('#name').val() || '익명';
-        var message = $('#message').val();
-        var password = $('#password').val(); // 추가된 비밀번호 필드
+      function escapeHtml(text) {
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+$('#guestbook-form').submit(function (event) {
+    event.preventDefault();
+    var name = escapeHtml($('#name').val()) || '익명';
+    var message = escapeHtml($('#message').val());
+    var password = $('#password').val();
 
         $.ajax({
           type: 'POST',

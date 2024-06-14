@@ -31,6 +31,7 @@ class Youtubes(db.Model):
 
     def __repr__(self):
         return f'{self.username} {self.title} 추천 by {self.artist}'
+    
 
 with app.app_context():
     db.create_all()
@@ -129,6 +130,11 @@ def save_data(data):
     with open(DATA_FILE, 'w') as file:
         json.dump(data, file, indent=4)
 
+
+def remove_html_tags(text):
+    clean = re.compile('<.*?>')
+    return re.sub(clean, '', text)
+
 # 방명록 페이지 렌더링
 @app.route('/guest')
 def guest():
@@ -143,8 +149,8 @@ def get_entries():
 # 방명록 데이터 추가하기 API
 @app.route('/add_entry', methods=['POST'])
 def add_entry():
-    name = request.json.get('name', '익명')
-    message = request.json['message']
+    name = remove_html_tags(request.json.get('name', '익명'))
+    message = remove_html_tags(request.json['message'])
     password = request.json.get('password')
 
     data = read_data()
@@ -173,7 +179,7 @@ def delete_entry(entry_id):
 # 방명록 데이터 수정하기 API
 @app.route('/edit_entry/<int:entry_id>', methods=['PUT'])
 def edit_entry(entry_id):
-    new_message = request.json['message']
+    new_message = remove_html_tags(request.json['message'])
     password = request.json['password']
 
     data = read_data()
@@ -189,4 +195,4 @@ def edit_entry(entry_id):
         return jsonify({'error': '해당 ID의 방명록을 찾을 수 없습니다.'}), 404
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True)
