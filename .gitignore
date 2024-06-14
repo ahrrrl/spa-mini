@@ -1,2 +1,5 @@
 *.db
 guestbook.json
+
+# Ignore myenv directory
+myenv/
